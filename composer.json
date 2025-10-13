@@ -1,0 +1,56 @@
+{
+    "name": "silon-oy/silon-rules-codesniffer",
+    "description": "Silon CodeSniffer Rules",
+    "type": "phpcodesniffer-standard",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Silon",
+            "homepage": "https://silon.fi"
+        }
+    ],
+    "keywords": [
+        "tooling",
+        "phpcs",
+        "standards",
+        "WordPress"
+    ],
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "composer/installers": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@install-codestandards",
+            "@used-rules-list-update"
+        ],
+        "install-codestandards": "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
+        "used-rules-list-update": "vendor/bin/phpcs --standard=./Silon/ruleset.xml -e | sed -e 's/  /    /' > USED_RULES.md",
+        "lint": "vendor/bin/phpcs",
+        "phpcs": "vendor/bin/phpcs"
+    },
+    "require": {
+        "php": ">=7.4|>=8",
+        "composer/installers": "*",
+        "dealerdirect/phpcodesniffer-composer-installer": "^v0.7.1",
+        "pheromone/phpcs-security-audit": "^2.0",
+        "phpcompatibility/php-compatibility": "^9.3",
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "slevomat/coding-standard": "^8.12",
+        "squizlabs/php_codesniffer": "^3.7",
+        "wp-coding-standards/wpcs": "^3.0"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    },
+    "autoload": {
+        "psr-4": {
+            "Silon\\": "Silon/"
+        }
+    }
+}

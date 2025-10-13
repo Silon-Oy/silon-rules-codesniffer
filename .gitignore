@@ -1,0 +1,11 @@
+# Lock files are not relevant in WordPress as there is little versioning options anyway
+composer.lock
+# package-lock.json
+
+vendor
+.env
+.env.*
+!.env.example
+.DS_Store
+.idea
+.vscode
