@@ -49,7 +49,7 @@
         "roave/security-advisories": "dev-latest"
     },
     "bin": [
-        "bin/install-hooks"
+        "bin/silon-install-hooks"
     ],
     "autoload": {
         "psr-4": {
