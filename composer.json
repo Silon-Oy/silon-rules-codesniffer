@@ -48,6 +48,9 @@
     "require-dev": {
         "roave/security-advisories": "dev-latest"
     },
+    "bin": [
+        "bin/silon-install-hooks"
+    ],
     "autoload": {
         "psr-4": {
             "Silon\\": "Silon/"

@@ -1,0 +1,58 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Installs Silon git hooks into the current project.
+ *
+ * Usage: vendor/bin/silon-install-hooks
+ */
+
+$hookSource = dirname(__DIR__) . '/hooks/pre-commit';
+$projectRoot = getcwd();
+
+// Find .git directory (supports worktrees)
+$gitDir = trim((string) `git rev-parse --git-dir 2>/dev/null`);
+
+if (empty($gitDir)) {
+    echo "silon-install-hooks: not a git repository — skipping.\n";
+    exit(0);
+}
+
+// Resolve to absolute path
+if ($gitDir[0] !== '/') {
+    $gitDir = $projectRoot . '/' . $gitDir;
+}
+
+$hooksDir = $gitDir . '/hooks';
+$target = $hooksDir . '/pre-commit';
+
+// Create hooks directory if it doesn't exist
+if (!is_dir($hooksDir)) {
+    mkdir($hooksDir, 0755, true);
+}
+
+// Check if source hook exists
+if (!file_exists($hookSource)) {
+    echo "silon-install-hooks: hook source not found at {$hookSource}\n";
+    exit(1);
+}
+
+// Backup existing hook if it wasn't installed by us
+if (file_exists($target)) {
+    $existing = file_get_contents($target);
+    if (strpos($existing, 'silon-oy/silon-rules-codesniffer') !== false) {
+        // Already our hook — overwrite with latest version
+    } else {
+        $backup = $target . '.bak';
+        copy($target, $backup);
+        echo "silon-install-hooks: existing pre-commit hook backed up to .pre-commit.bak\n";
+    }
+}
+
+// Copy hook
+if (copy($hookSource, $target)) {
+    chmod($target, 0755);
+    echo "silon-install-hooks: pre-commit hook installed.\n";
+} else {
+    echo "silon-install-hooks: failed to install pre-commit hook.\n";
+    exit(1);
+}
