@@ -4,10 +4,31 @@
 
 ## Installation
 
+The package is not on Packagist yet, so add this repository as a VCS source in
+your project's `composer.json` first:
+
+```json
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Silon-Oy/silon-rules-codesniffer"
+        }
+    ]
+}
 ```
-composer require --dev silon-oy/silon-rules-codesniffer
+
+The repository is public, so no access token or `COMPOSER_AUTH` is needed.
+Then require a tagged release and copy the example config:
+
+```
+composer require --dev silon-oy/silon-rules-codesniffer:^1.0
 cp vendor/silon-oy/silon-rules-codesniffer/phpcs.xml phpcs.xml
 ```
+
+## License
+
+[MIT](LICENSE)
 
 ## Usage
 
