@@ -26,10 +26,6 @@ composer require --dev silon-oy/silon-rules-codesniffer:^1.0
 cp vendor/silon-oy/silon-rules-codesniffer/phpcs.xml phpcs.xml
 ```
 
-## License
-
-[MIT](LICENSE)
-
 ## Usage
 
 Use `vendor/bin/phpcs --standard=phpcs.xml` to make sure you are using the `phpcs` command from this package.
@@ -72,3 +68,7 @@ To install manually: `vendor/bin/silon-install-hooks`
 ```
 git commit --no-verify
 ```
+
+## License
+
+[MIT](LICENSE)
